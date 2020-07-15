@@ -1,8 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "C:\\Users\\makadown\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\makadown\\.nuget\\packages"
-    ]
-  }
-}
