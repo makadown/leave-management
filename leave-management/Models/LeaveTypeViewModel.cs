@@ -17,7 +17,9 @@ namespace leave_management.Models
     public class DetailsLeaveTypeViewModel
     {
         public int Id { get; set; }
+        [Display(Name = "Nombre")]
         public string Name { get; set; }
+        [Display(Name="Fecha Creación")]
         public DateTime DateCreated { get; set; }
     }
 
