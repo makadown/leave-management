@@ -22,11 +22,15 @@ namespace leave_management.Controllers
             _mapper = mapper;
         }
 
-        // GET: LeaveTypesController
+        /// <summary>
+        /// GET: LeaveTypesController
+        /// Abre pagina Index para Tipos de Licencia
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             var leavetypes = _repo.FindAll().ToList();
-            var model = _mapper.Map<List<LeaveType>, List<DetailsLeaveTypeViewModel>>(leavetypes);
+            var model = _mapper.Map<List<LeaveType>, List<LeaveTypeViewModel>>(leavetypes);
             return View(model);
         }
 
@@ -36,19 +40,40 @@ namespace leave_management.Controllers
             return View();
         }
 
-        // GET: LeaveTypesController/Create
+        /// <summary>
+        /// GET: LeaveTypesController/Create
+        /// Abre página con formulario para crear tipo de licencia
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: LeaveTypesController/Create
+        /// <summary>
+        /// POST: LeaveTypesController/Create
+        /// Recibe info enviada desde formulario de la página para crear tipo de licencia
+        /// </summary>
+        /// <param name="collection"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(LeaveTypeViewModel model)
         {
             try
             {
+                if (!ModelState.IsValid) {
+                    return View(model);
+                }
+                var leaveType = _mapper.Map<LeaveType>(model);
+                leaveType.DateCreated = DateTime.Now;
+                if (!_repo.Create(leaveType))
+                {
+                    ModelState.AddModelError("", "Algo no fué bien");
+                    return View(model);
+                }
+                _repo.Save();
+
                 return RedirectToAction(nameof(Index));
             }
             catch

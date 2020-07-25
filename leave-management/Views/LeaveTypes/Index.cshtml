@@ -1,4 +1,4 @@
-﻿@model IEnumerable<leave_management.Models.DetailsLeaveTypeViewModel>
+﻿@model IEnumerable<leave_management.Models.LeaveTypeViewModel>
 
 @{
     ViewData["Title"] = "Gestión de Tipos de Licencia";
@@ -31,8 +31,8 @@
                 @Html.DisplayFor(modelItem => item.DateCreated)
             </td>
             <td>
-                <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i> Editar</a> |
-                <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-info-circle"></i> Detalle</a> |
+                <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>  
+                <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-info-circle" aria-hidden="true"></i> Detalle</a>  
                 <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash"></i> Borrar</a>
             </td>
         </tr>
