@@ -1,0 +1,33 @@
+﻿@model leave_management.Models.LeaveTypeViewModel
+
+@{
+    ViewData["Title"] = "Eliminar tipo de licencia";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Eliminar tipo de licencia</h1>
+
+<h3>Está seguro de eliminar este registro?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Eliminar" class="btn btn-danger btn-block" /> |
+        <a class="btn btn-outline-primary" asp-action="Index"><i class="fa fa-arrow-left" aria-hidden="true"></i> Regresar </a>
+    </form>
+</div>

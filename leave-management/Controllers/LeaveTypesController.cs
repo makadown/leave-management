@@ -138,21 +138,49 @@ namespace leave_management.Controllers
         // GET: LeaveTypesController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            /* if (!_repo.Exists(id))
+             {
+                 return NotFound();
+             }
+             var leaveTypeVM = _mapper.Map<LeaveTypeViewModel>(_repo.FindById(id));
+             return View(leaveTypeVM);*/
+            var leaveType = _repo.FindById(id);
+            if (leaveType == null)
+            {
+                return NotFound();
+            }
+            if (!_repo.Delete(leaveType))
+            {
+                ModelState.AddModelError("", "Algo no fué bien al eliminar");
+                return BadRequest();
+            }
+            _repo.Save();
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: LeaveTypesController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, LeaveTypeViewModel model)
         {
             try
             {
+                var leaveType = _repo.FindById(id);
+                if (leaveType == null) {
+                    return NotFound();
+                }
+                if (!_repo.Delete(leaveType))
+                {
+                    ModelState.AddModelError("", "Algo no fué bien al eliminar");
+                    return View(model);
+                }
+                _repo.Save();
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                ModelState.AddModelError("", "Algo no fué bien al eliminar");
+                return View(model);
             }
         }
     }

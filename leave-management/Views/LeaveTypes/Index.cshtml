@@ -33,7 +33,10 @@
             <td>
                 <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-pencil" aria-hidden="true"></i></a>  
                 <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-info-circle" aria-hidden="true"></i></a>  
-                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash"></i></a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id" 
+                        onclick="return confirm('Está seguro de eliminar este registro?');">
+                        <i class="fa fa-trash"></i>
+                </a>
             </td>
         </tr>
 }
