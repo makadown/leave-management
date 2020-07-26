@@ -7,9 +7,9 @@
     <h1>Gestión de Tipos de Licencia</h1>
 
 <p>
-    <a class="btn btn-secondary" asp-action="Create">Crear Nuevo</a>
+    <a class="btn btn-secondary" asp-action="Create"> <i class="fa fa-plus" aria-hidden="true"></i> Crear Nuevo</a>
 </p>
-<table class="table table-dark">
+<table id="tblData" class="table">
     <thead>
         <tr>
             <th>
@@ -18,7 +18,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.DateCreated)
             </th>
-            <th></th>
+            <th> Acciones </th>
         </tr>
     </thead>
     <tbody>
@@ -31,8 +31,12 @@
                 @Html.DisplayFor(modelItem => item.DateCreated)
             </td style="vertical-align: middle">
             <td>
-                <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-pencil" aria-hidden="true"></i></a>  
-                <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-info-circle" aria-hidden="true"></i></a>  
+                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>  
+                <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                </a>  
                 <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id" 
                         onclick="return confirm('Está seguro de eliminar este registro?');">
                         <i class="fa fa-trash"></i>
