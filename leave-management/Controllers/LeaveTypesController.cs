@@ -37,7 +37,12 @@ namespace leave_management.Controllers
         // GET: LeaveTypesController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            if (!_repo.Exists(id))
+            {
+                return NotFound();
+            }
+            var leaveTypeVM = _mapper.Map<LeaveTypeViewModel>(_repo.FindById(id));
+            return View(leaveTypeVM);
         }
 
         /// <summary>
@@ -78,28 +83,55 @@ namespace leave_management.Controllers
             }
             catch
             {
-                return View();
+                ModelState.AddModelError("", "Algo no fué bien");
+                return View(model);
             }
         }
 
-        // GET: LeaveTypesController/Edit/5
+        /// <summary>
+        /// GET: LeaveTypesController/Edit/5
+        /// Envía a pagina de edición 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Edit(int id)
         {
-            return View();
+            if (!_repo.Exists(id)) {
+                return NotFound();
+            }
+            var leaveTypeVM = _mapper.Map<LeaveTypeViewModel>( _repo.FindById(id) );
+            return View(leaveTypeVM);
         }
 
-        // POST: LeaveTypesController/Edit/5
+        /// <summary>
+        /// POST: LeaveTypesController/Edit/5
+        /// Recibe el formulario de la pagina de edición para proceder a guardar la info
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(LeaveTypeViewModel model)
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                var leaveType = _mapper.Map<LeaveType>(model);
+                if (!_repo.Update(leaveType))
+                {
+                    ModelState.AddModelError("", "Algo no fué bien al guardar");
+                    return View(model);
+                }
+                _repo.Save();
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                ModelState.AddModelError("", "Algo no fué bien al guardar");
+                return View(model);
             }
         }
 

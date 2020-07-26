@@ -23,6 +23,12 @@ namespace leave_management.Contracts
         /// <returns></returns>
         T FindById(int id);
         /// <summary>
+        /// Verifica si el item con el id dado existe
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        bool Exists(int id);
+        /// <summary>
         /// Método para crear registro
         /// </summary>
         /// <param name="entity"></param>
