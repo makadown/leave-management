@@ -3,3 +3,10 @@
 Proyecto de curso https://www.udemy.com/course/complete-aspnet-core-31-and-entity-framework-development
 
 Instructor: Trevoir Williams
+
+## sample users
+
+
+
+mayito@mayito.com
+Abc_123
