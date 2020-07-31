@@ -6,7 +6,9 @@ Instructor: Trevoir Williams
 
 ## sample users
 
-
-
-mayito@mayito.com
+ROL ADMIN
+```
+admin@admin.com
 Abc_123
+```
+
