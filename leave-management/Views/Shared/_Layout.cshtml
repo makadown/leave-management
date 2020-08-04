@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -25,21 +29,31 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="" asp-action="">Aplicar para Licencia</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Gestionar
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-dark" asp-controller="LeaveTypes" asp-action="Index">Tipos de Licencia</a>
-                                <a class="dropdown-item text-dark" href="#">Asignaciónes de Licencias</a>
-                                <a class="dropdown-item text-dark" href="#">Aplicaciónes de Licencias</a>
-                                <a class="dropdown-item text-dark" href="#">Empleados</a>
-                            </div>
-                        </li>
-                    </ul>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            @if (User.IsInRole("Employee"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="" asp-action="">Aplicar para Licencia</a>
+                                </li>
+                            }
+
+                            @if (User.IsInRole("Administrator"))
+                            {
+                                <li class="nav-item dropdown">
+                                        <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Gestionar
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item text-dark" asp-controller="LeaveTypes" asp-action="Index">Tipos de Licencia</a>
+                                            <a class="dropdown-item text-dark" href="#">Asignaciónes de Licencias</a>
+                                            <a class="dropdown-item text-dark" href="#">Aplicaciónes de Licencias</a>
+                                            <a class="dropdown-item text-dark" href="#">Empleados</a>
+                                        </div>
+                                 </li>
+                            }
+                        }
+                        </ul>
                 </div>
             </div>
         </nav>
