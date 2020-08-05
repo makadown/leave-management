@@ -19,5 +19,9 @@ namespace leave_management.Data
         [ForeignKey("LeaveTypeId")]
         public LeaveType LeaveType { get; set; }
         public int LeaveTypeId { get; set; }
+        /// <summary>
+        /// Representa el año (ej, 2020)
+        /// </summary>
+        public int Period { get; set; }
     }
 }
