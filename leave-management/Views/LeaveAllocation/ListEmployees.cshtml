@@ -35,7 +35,7 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                <a class="btn btn-outline-success" asp-action="Details" asp-route-id="@item.Id">
+                <a class="btn btn-outline-success" asp-controller="LeaveAllocation" asp-action="Details" asp-route-id="@item.Id">
                     <i class="fa fa-search"></i> Detalles
                 </a>
                 @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })*@

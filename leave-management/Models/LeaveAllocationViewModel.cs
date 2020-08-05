@@ -44,4 +44,13 @@ namespace leave_management.Models
         public string EmployeeId { get; set; }
         public List<LeaveAllocationViewModel> LeaveAllocations { get; set; }
     }
+
+    public class EditLeaveAllocationVM
+    {
+        public int Id { get; set; }
+        public string EmployeeId { get; set; }
+        public EmployeeViewModel Employee { get; set; }
+        public int NumberOfDays { get; set; }
+        public LeaveTypeViewModel LeaveType { get; set; }
+    }
 }
