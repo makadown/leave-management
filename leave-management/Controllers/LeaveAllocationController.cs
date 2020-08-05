@@ -17,7 +17,7 @@ namespace leave_management.Controllers
     public class LeaveAllocationController : Controller
     {
         private readonly ILeaveTypeRepository _leaveRepo;
-        private readonly ILeaveAllocationRepository __leaveAllocationRepo;
+        private readonly ILeaveAllocationRepository _leaveAllocationRepo;
         private readonly IMapper _mapper;
         private readonly UserManager<Employee> _userManager;
 
@@ -26,7 +26,7 @@ namespace leave_management.Controllers
             UserManager<Employee> userManager)
         {
             _leaveRepo = leaveRepo;
-            __leaveAllocationRepo = repo;
+            _leaveAllocationRepo = repo;
             _mapper = mapper;
             _userManager = userManager;
         }
@@ -50,7 +50,7 @@ namespace leave_management.Controllers
             var employees = _userManager.GetUsersInRoleAsync("Employee").Result;
             foreach (var emp in employees)
             {
-                if (__leaveAllocationRepo.CheckAllocation(id, emp.Id))
+                if (_leaveAllocationRepo.CheckAllocation(id, emp.Id))
                     continue;
                 var allocation = new LeaveAllocationViewModel
                 {
@@ -61,7 +61,7 @@ namespace leave_management.Controllers
                     Period = DateTime.Now.Year
                 };
                 var leaveAllocation = _mapper.Map<LeaveAllocation>(allocation);
-                __leaveAllocationRepo.Create(leaveAllocation);
+                _leaveAllocationRepo.Create(leaveAllocation);
             }
             return RedirectToAction(nameof(Index));
         }
@@ -72,10 +72,23 @@ namespace leave_management.Controllers
             return View(model);
         }
 
-        // GET: LeaveAllocationController/Details/5
-        public ActionResult Details(int id)
+        /// <summary>
+        /// Muestra las licencias por empleado
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Details(string id)
         {
-            return View();
+            var employee = _mapper.Map<EmployeeViewModel>(_userManager.FindByIdAsync(id).Result);
+            var allocations = _mapper.Map<List<LeaveAllocationViewModel>>
+                            (_leaveAllocationRepo.GetLeaveAllocationsByEmployee(id));
+            var model = new ViewAllocationsVM
+            {
+                Employee = employee,
+                EmployeeId = id,
+                LeaveAllocations = allocations
+            };
+            return View(model);
         }
 
         // GET: LeaveAllocationController/Create

@@ -17,6 +17,8 @@ namespace leave_management.Models
         public string EmployeeId { get; set; } 
         public LeaveTypeViewModel LeaveType { get; set; }
         public int LeaveTypeId { get; set; }
+
+        /*
         /// <summary>
         /// Representa el dropdownList que tendrá el formulario para 
         /// empleados
@@ -26,6 +28,7 @@ namespace leave_management.Models
         /// Representa el dropdownList que tendrá el formulario para LeaveTypes
         /// </summary>
         public IEnumerable<SelectListItem> LeaveTypes { get; set; }
+        */
     }
 
     /// <summary>
@@ -34,5 +37,11 @@ namespace leave_management.Models
     public class CreateLeaveAllocationVM {
         public int NumberUpdated { get; set; }
         public List<LeaveTypeViewModel> LeaveTypes { get; set; }
+    }
+
+    public class ViewAllocationsVM {
+        public EmployeeViewModel Employee { get; set; }
+        public string EmployeeId { get; set; }
+        public List<LeaveAllocationViewModel> LeaveAllocations { get; set; }
     }
 }
