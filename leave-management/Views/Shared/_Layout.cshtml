@@ -1,6 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@using leave_management.Data
+
+@inject SignInManager<Employee> SignInManager
+@inject UserManager<Employee> UserManager
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,19 +43,19 @@
                             @if (User.IsInRole("Administrator"))
                             {
                                 <li class="nav-item dropdown">
-                                        <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Gestionar
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item text-dark" asp-controller="LeaveTypes" asp-action="Index">Tipos de Licencia</a>
-                                            <a class="dropdown-item text-dark" asp-controller="LeaveAllocation" asp-action="Index">Asignaciónes de Licencias</a>
-                                            <a class="dropdown-item text-dark" href="#">Aplicaciónes de Licencias</a>
-                                            <a class="dropdown-item text-dark" href="#">Empleados</a>
-                                        </div>
-                                 </li>
+                                    <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Gestionar
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item text-dark" asp-controller="LeaveTypes" asp-action="Index">Tipos de Licencia</a>
+                                        <a class="dropdown-item text-dark" asp-controller="LeaveAllocation" asp-action="Index">Asignaciónes de Licencias</a>
+                                        <a class="dropdown-item text-dark" href="#">Aplicaciónes de Licencias</a>
+                                        <a class="dropdown-item text-dark" asp-controller="LeaveAllocation" asp-action="ListEmployees">Empleados</a>
+                                    </div>
+                                </li>
                             }
                         }
-                        </ul>
+                    </ul>
                 </div>
             </div>
         </nav>

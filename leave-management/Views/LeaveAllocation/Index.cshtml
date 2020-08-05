@@ -21,11 +21,13 @@
     <tbody>
 @foreach (var item in Model.LeaveTypes) {
         <tr>
-            <td>
+            <td style="vertical-align: middle">
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.ActionLink("Asignar a empleados", "SetLeave", new {  id=item.Id } )
+                <a class="btn btn-outline-success" asp-action="SetLeave" asp-route-id="@item.Id">
+                    <i class="fa fa-pencil"></i> Asignar a empleados
+                </a>
             </td>
         </tr>
 }
