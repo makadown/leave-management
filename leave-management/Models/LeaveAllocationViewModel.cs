@@ -27,4 +27,12 @@ namespace leave_management.Models
         /// </summary>
         public IEnumerable<SelectListItem> LeaveTypes { get; set; }
     }
+
+    /// <summary>
+    /// modelo para usar cuando se crea una nueva asignacion
+    /// </summary>
+    public class CreateLeaveAllocationVM {
+        public int NumberUpdated { get; set; }
+        public List<LeaveTypeViewModel> LeaveTypes { get; set; }
+    }
 }
