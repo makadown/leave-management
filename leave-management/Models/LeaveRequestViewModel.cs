@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace leave_management.Models
 {
-    public class LeaveHistoryViewModel
+    public class LeaveRequestViewModel
     {
         public int Id { get; set; }
         public EmployeeViewModel RequestingEmployee { get; set; }
@@ -23,10 +23,10 @@ namespace leave_management.Models
         public bool? Approved { get; set; }
         public EmployeeViewModel ApprovedBy { get; set; }
         public string ApprovedById { get; set; }
-
+        /*
         /// <summary>
         /// Representa el dropdownList que tendrá el formulario para LeaveTypes
         /// </summary>
-        public IEnumerable<SelectListItem> LeaveTypes { get; set; }
+        public IEnumerable<SelectListItem> LeaveTypes { get; set; }*/
     }
 }
