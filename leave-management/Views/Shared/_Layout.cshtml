@@ -33,12 +33,11 @@
                         </li>
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            @if (User.IsInRole("Employee"))
-                            {
+                            
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" asp-area="" asp-controller="" asp-action="">Aplicar para Licencia</a>
+                                    <a class="nav-link text-white" asp-area="" asp-controller="LeaveRequest" asp-action="Index">Aplicaciones de Licencia</a>
                                 </li>
-                            }
+                             
 
                             @if (User.IsInRole("Administrator"))
                             {

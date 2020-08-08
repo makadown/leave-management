@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,5 +29,14 @@ namespace leave_management.Models
         /// Representa el dropdownList que tendrá el formulario para LeaveTypes
         /// </summary>
         public IEnumerable<SelectListItem> LeaveTypes { get; set; }*/
+    }
+
+    public class AdminLeaveRequestViewVM 
+    {
+        public int TotalRequests { get; set; }
+        public int ApprovedRequests { get; set; }
+        public int PendingRequests { get; set; }
+        public int RejectedRequests { get; set; }
+        public List<LeaveRequestViewModel> LeaveRequests { get; set; }
     }
 }
