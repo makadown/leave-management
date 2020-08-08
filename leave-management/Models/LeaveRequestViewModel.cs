@@ -21,6 +21,7 @@ namespace leave_management.Models
         public int LeaveTypeId { get; set; }
         public DateTime DateRequested { get; set; }
         public DateTime DateActioned { get; set; }
+        [Display(Name = "Aprobada")]
         public bool? Approved { get; set; }
         public EmployeeViewModel ApprovedBy { get; set; }
         public string ApprovedById { get; set; }
@@ -33,9 +34,13 @@ namespace leave_management.Models
 
     public class AdminLeaveRequestViewVM 
     {
+        [Display(Name = "Total de peticiones")]
         public int TotalRequests { get; set; }
+        [Display(Name = "Peticiones aprobadas")]
         public int ApprovedRequests { get; set; }
+        [Display(Name = "Peticiones pendientes")]
         public int PendingRequests { get; set; }
+        [Display(Name = "Peticiones rechazadas")]
         public int RejectedRequests { get; set; }
         public List<LeaveRequestViewModel> LeaveRequests { get; set; }
     }

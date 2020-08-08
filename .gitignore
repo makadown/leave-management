@@ -262,3 +262,5 @@ __pycache__/
 leave-management/bin/Debug/netcoreapp3.1/
 
 leave-management/obj/Debug/netcoreapp3.1/
+
+leave-management/obj/
