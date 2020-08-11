@@ -24,10 +24,12 @@ namespace leave_management.Controllers
         private readonly UserManager<Employee> _userManager;
 
         public LeaveRequestController(ILeaveRequestRepository leaveRequestRepo,
+            ILeaveAllocationRepository leaveAllocationRepo,
             ILeaveTypeRepository leaveRepo, IMapper mapper,
             UserManager<Employee> userManager)
         {
             _leaveRequestRepo = leaveRequestRepo;
+            _leaveAllocationRepo = leaveAllocationRepo;
             _leaveRepo = leaveRepo;
             _mapper = mapper;
             _userManager = userManager;
@@ -74,15 +76,60 @@ namespace leave_management.Controllers
         // POST: LeaveRequestController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(CreateLeaveRequestVM model)
         {
+            var leaveTypes = _leaveRepo.FindAll();
+            var leaveTypeItems = leaveTypes
+                    .Select(q => new SelectListItem
+                    {
+                        Text = q.Name,
+                        Value = q.Id.ToString()
+                    });
+            model.LeaveTypes = leaveTypeItems;
             try
             {
-                return RedirectToAction(nameof(Index));
+                var startDate = Convert.ToDateTime(model.StartDate);
+                var endDate = Convert.ToDateTime(model.EndDate);
+
+                if (!ModelState.IsValid) {
+                    return View(model);
+                }
+
+                if (DateTime.Compare(startDate, endDate) > 1) {
+                    ModelState.AddModelError("", "Fecha de inicio no puede ser mayor que la fecha final");
+                    return View(model);
+                }
+
+                var employee = _userManager.GetUserAsync(User).Result;
+                var allocation = _leaveAllocationRepo.GetLeaveAllocationByEmployeeAndType(employee.Id, model.LeaveTypeId);
+                int daysRequested = (int)(startDate.Date - endDate.Date).TotalDays;
+                if (daysRequested > allocation.NumberOfDays) {
+                    ModelState.AddModelError("", "Los dias pedidos superan el limite de dias permitidos");
+                    return View(model);
+                }
+
+                var leaveRequestModel = new LeaveRequestViewModel {
+                    RequestingEmployeeId = employee.Id,
+                    LeaveTypeId = model.LeaveTypeId,
+                    StartDate = startDate,
+                    EndDate = endDate,
+                    Approved = null,
+                    DateRequested = DateTime.Now,
+                    DateActioned = DateTime.Now
+                };
+                var leaveRequest = _mapper.Map<LeaveRequest>(leaveRequestModel);
+
+                if (!_leaveRequestRepo.Create(leaveRequest)) {
+                    ModelState.AddModelError("", "Algo falló al crear registro");
+                    return View(model);
+                }
+
+                return RedirectToAction(nameof(Index), "Home");
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", "Something went wrong"); 
+                return View(model);
             }
         }
 

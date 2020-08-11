@@ -56,10 +56,10 @@ namespace leave_management.Models
     {
         [Display(Name = "Fecha inicio")]
         [Required]
-        public DateTime StartDate { get; set; }
+        public string StartDate { get; set; }
         [Display(Name = "Fecha fin")]
         [Required]
-        public DateTime EndDate { get; set; }
+        public string EndDate { get; set; }
         public IEnumerable<SelectListItem> LeaveTypes { get; set; }
         [Display(Name ="Tipo de Licencia")]
         public int LeaveTypeId { get; set; }
