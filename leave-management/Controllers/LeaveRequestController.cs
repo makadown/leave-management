@@ -55,7 +55,9 @@ namespace leave_management.Controllers
         // GET: LeaveRequestController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var leaveRequest = _leaveRequestRepo.FindById(id);
+            var model = _mapper.Map<LeaveRequestViewModel>(leaveRequest);
+            return View(model);
         }
 
         // GET: LeaveRequestController/Create
@@ -153,6 +155,42 @@ namespace leave_management.Controllers
                 return View();
             }
         }
+
+        public ActionResult ApproveRequest(int id)
+        {
+            var employee = _userManager.GetUserAsync(User).Result;
+            var leaveRequest = _leaveRequestRepo.FindById(id);
+            var allocation = _leaveAllocationRepo
+                    .GetLeaveAllocationByEmployeeAndType(leaveRequest.RequestingEmployeeId,
+                        leaveRequest.LeaveTypeId);
+
+            int daysRequested = (int)(leaveRequest.EndDate.Date - leaveRequest.StartDate.Date).TotalDays;
+            allocation.NumberOfDays -= daysRequested;
+
+            leaveRequest.Approved = true;
+            leaveRequest.ApprovedById = employee.Id;
+            leaveRequest.DateActioned = DateTime.Now;
+
+            _leaveAllocationRepo.Update(allocation);
+            _leaveRequestRepo.Update(leaveRequest);
+            _leaveRequestRepo.Save();
+            _leaveAllocationRepo.Save();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public ActionResult RejectRequest(int id)
+        {
+            var employee = _userManager.GetUserAsync(User).Result;
+            var leaveRequest = _leaveRequestRepo.FindById(id);
+            leaveRequest.Approved = false;
+            leaveRequest.ApprovedById = employee.Id;
+            leaveRequest.DateActioned = DateTime.Now;
+
+            _leaveRequestRepo.Update(leaveRequest);
+            _leaveRequestRepo.Save();
+            return RedirectToAction(nameof(Index));
+        }
+        
 
         // GET: LeaveRequestController/Delete/5
         public ActionResult Delete(int id)

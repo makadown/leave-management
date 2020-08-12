@@ -8,7 +8,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Crear Nuevo</a>
+    <a class="btn btn-primary" asp-action="Create">Crear Nuevo</a>
 </p>
 
 <div class="row">
@@ -49,7 +49,7 @@
 <hr />
 <h1>Registros de peticiones de licencia</h1>
 <hr />
-<table class="table">
+<table id="tblData" class="table">
     <thead>
         <tr>
             <th>
@@ -77,7 +77,6 @@
 @foreach (var item in Model.LeaveRequests) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.RequestingEmployee.Id)
                 @Html.DisplayFor(modelItem => item.RequestingEmployee.FirstName)
                 @Html.DisplayFor(modelItem => item.RequestingEmployee.LastName)
             </td>
@@ -108,9 +107,10 @@
                 }
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a class="btn btn-outline-primary" asp-action="Details" asp-route-id="@item.Id">
+                    <i class="fa fa-file"></i>
+                        Revisar
+                </a>
             </td>
         </tr>
 }
