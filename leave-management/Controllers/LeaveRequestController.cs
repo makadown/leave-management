@@ -52,6 +52,24 @@ namespace leave_management.Controllers
             return View(model);
         }
 
+        public ActionResult MyLeave() {
+            var employee = _userManager.GetUserAsync(User).Result;
+            var employeeId = employee.Id;
+            var employeeAllocations = _leaveAllocationRepo.GetLeaveAllocationsByEmployee(employeeId);
+            var employeeRequests = _leaveRequestRepo.GetLeaveRequestsByEmployee(employeeId);
+
+            var employeeAllocationsModel = _mapper.Map<List<LeaveAllocationViewModel>>(employeeAllocations);
+            var employeeRequestModel = _mapper.Map<List<LeaveRequestViewModel>>(employeeRequests);
+
+            var model = new EmployeeLeaveRequestViewVM
+            {
+                LeaveAllocations = employeeAllocationsModel,
+                LeaveRequests = employeeRequestModel
+            };
+
+            return View(model);
+        }
+
         // GET: LeaveRequestController/Details/5
         public ActionResult Details(int id)
         {
@@ -73,6 +91,19 @@ namespace leave_management.Controllers
                 LeaveTypes = leaveTypeItems
             };
             return View(model);
+        }
+
+        public ActionResult CancelRequest(int id) {
+            var leaveRequest = _leaveRequestRepo.FindById(id);
+            if (leaveRequest.Approved) {
+                int daysRequested = (int)(leaveRequest.EndDate - leaveRequest.StartDate.Date).TotalDays;
+
+                var allocation = _leaveAllocationRepo.GetLeaveAllocationByEmployeeAndType(employee.Id, model.LeaveTypeId);
+                allocation.NumberOfDays += daysRequested;
+            }
+            leaveRequest.Cancelled = true;
+            _leaveRequestRepo.Update(leaveRequest);
+            return RedirectToAction("MyLeave");
         }
 
         // POST: LeaveRequestController/Create
@@ -104,7 +135,8 @@ namespace leave_management.Controllers
 
                 var employee = _userManager.GetUserAsync(User).Result;
                 var allocation = _leaveAllocationRepo.GetLeaveAllocationByEmployeeAndType(employee.Id, model.LeaveTypeId);
-                int daysRequested = (int)(startDate.Date - endDate.Date).TotalDays;
+                int daysRequested = (int)(endDate.Date - startDate.Date).TotalDays;
+
                 if (daysRequested > allocation.NumberOfDays) {
                     ModelState.AddModelError("", "Los dias pedidos superan el limite de dias permitidos");
                     return View(model);
@@ -117,7 +149,8 @@ namespace leave_management.Controllers
                     EndDate = endDate,
                     Approved = null,
                     DateRequested = DateTime.Now,
-                    DateActioned = DateTime.Now
+                    DateActioned = DateTime.Now,
+                    RequestComments = model.RequestComments
                 };
                 var leaveRequest = _mapper.Map<LeaveRequest>(leaveRequestModel);
 
@@ -126,7 +159,7 @@ namespace leave_management.Controllers
                     return View(model);
                 }
 
-                return RedirectToAction(nameof(Index), "Home");
+                return RedirectToAction("MyLeave");
             }
             catch(Exception ex)
             {

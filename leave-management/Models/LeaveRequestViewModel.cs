@@ -30,13 +30,12 @@ namespace leave_management.Models
         public DateTime DateActioned { get; set; }
         [Display(Name = "Estatus")]
         public bool? Approved { get; set; }
+        public bool Cancelled { get; set; }
         public EmployeeViewModel ApprovedBy { get; set; }
         public string ApprovedById { get; set; }
-        /*
-        /// <summary>
-        /// Representa el dropdownList que tendrá el formulario para LeaveTypes
-        /// </summary>
-        public IEnumerable<SelectListItem> LeaveTypes { get; set; }*/
+        [Display(Name ="Comentarios de empleado")]
+        [MaxLength(300)]
+        public string RequestComments { get; set; }
     }
 
     public class AdminLeaveRequestViewVM 
@@ -63,5 +62,14 @@ namespace leave_management.Models
         public IEnumerable<SelectListItem> LeaveTypes { get; set; }
         [Display(Name ="Tipo de Licencia")]
         public int LeaveTypeId { get; set; }
+
+        [Display(Name = "Comentarios de empleado")]
+        [MaxLength(300)]
+        public string RequestComments { get; set; }
+    }
+
+    public class EmployeeLeaveRequestViewVM { 
+        public List<LeaveAllocationViewModel> LeaveAllocations { get; set; }
+        public List<LeaveRequestViewModel> LeaveRequests { get; set; }
     }
 }
