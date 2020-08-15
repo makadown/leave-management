@@ -21,6 +21,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="~/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="~/css/adminlte.min.css" />
+    <link rel="stylesheet" href="~/css/dataTables.bootstrap4.min.css" />
+    
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -62,16 +64,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </div>
                     </div>
                 *@
-               
-                    <partial name="_LoginPartial" />
-               
+
+                <partial name="_LoginPartial" />
+
                 <hr />
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-    with font-awesome or any other icon font library -->
+                        with font-awesome or any other icon font library -->
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
                                 <i class="nav-icon fas fa-home"></i>
@@ -152,7 +154,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            @RenderBody()
+            <div class="content-header">
+                <div class="container-fluid">
+                </div>
+            </div>
+            <div class="content">
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>
+            </div>
         </div>
         <!-- /.content-wrapper -->
         <!-- Control Sidebar -->
@@ -180,9 +190,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="~/js/bootstrap.bundle.min.js"></script>
-    <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <!-- AdminLTE App -->
     <script src="~/js/adminlte.min.js"></script>
+    <!-- <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>-->
+    <script src="~/js/jquery.dataTables.min.js"></script>
+    <script src="~/js/dataTables.bootstrap4.min.js"></script>
+
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     @RenderSection("Scripts", required: false)
