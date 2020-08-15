@@ -88,17 +88,19 @@ namespace leave_management.Controllers
                         Value = q.Id.ToString()
                     });
             var model = new CreateLeaveRequestVM() {
-                LeaveTypes = leaveTypeItems
+                LeaveTypes = leaveTypeItems,
+                RequestComments = "Escriba aquí"
             };
             return View(model);
         }
 
         public ActionResult CancelRequest(int id) {
             var leaveRequest = _leaveRequestRepo.FindById(id);
-            if (leaveRequest.Approved) {
+            if (leaveRequest.Approved.Value==true) {
                 int daysRequested = (int)(leaveRequest.EndDate - leaveRequest.StartDate.Date).TotalDays;
 
-                var allocation = _leaveAllocationRepo.GetLeaveAllocationByEmployeeAndType(employee.Id, model.LeaveTypeId);
+                var allocation = _leaveAllocationRepo
+                    .GetLeaveAllocationByEmployeeAndType(leaveRequest.RequestingEmployeeId, leaveRequest.LeaveTypeId);
                 allocation.NumberOfDays += daysRequested;
             }
             leaveRequest.Cancelled = true;

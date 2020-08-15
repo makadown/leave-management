@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Crear petición de licencia</h1>
@@ -37,7 +36,7 @@
 
             <div class="form-group">
                 <label asp-for="RequestComments" class="control-label"></label>
-                <textarea asp-for="RequestComments" class="form-control" />
+                <textarea  class="form-control" asp-for="RequestComments" rows="3"></textarea>
                 <span asp-validation-for="RequestComments" class="text-danger"></span>
             </div>
 
