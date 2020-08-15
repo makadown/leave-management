@@ -15,41 +15,41 @@ namespace leave_management.Contracts
         /// Método para obtener todos los registros
         /// </summary>
         /// <returns></returns>
-        ICollection<T> FindAll();
+        Task<ICollection<T>> FindAll();
         /// <summary>
         /// Para encontrar un registro especifico por id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        T FindById(int id);
+        Task<T> FindById(int id);
         /// <summary>
         /// Verifica si el item con el id dado existe
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        bool Exists(int id);
+        Task<bool> Exists(int id);
         /// <summary>
         /// Método para crear registro
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        bool Create(T entity);
+        Task<bool> Create(T entity);
         /// <summary>
         /// Método para actualizar registro
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        bool Update(T entity);
+        Task<bool> Update(T entity);
         /// <summary>
         /// Método para eliminar registro
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        bool Delete(T entity);
+        Task<bool> Delete(T entity);
         /// <summary>
         /// Método para aplicar cualquier método CRUD aplicado al registro
         /// </summary>
         /// <returns></returns>
-        bool Save();
+        Task<bool> Save();
     }
 }
