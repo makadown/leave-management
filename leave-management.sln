@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30225.117
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "leave-management", "leave-management\leave-management.csproj", "{F2F56989-3E7C-4F9D-83C5-691C829CB241}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "leave-management", "leave-management.csproj", "{7C5F0CA1-7719-4D44-A616-5EB1DBF49F45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F2F56989-3E7C-4F9D-83C5-691C829CB241}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F2F56989-3E7C-4F9D-83C5-691C829CB241}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F2F56989-3E7C-4F9D-83C5-691C829CB241}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F2F56989-3E7C-4F9D-83C5-691C829CB241}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C5F0CA1-7719-4D44-A616-5EB1DBF49F45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C5F0CA1-7719-4D44-A616-5EB1DBF49F45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C5F0CA1-7719-4D44-A616-5EB1DBF49F45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C5F0CA1-7719-4D44-A616-5EB1DBF49F45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {6C887D2C-570C-4ABE-BF83-C3315C9F5AB3}
+		SolutionGuid = {79A76235-545F-4FF8-AEE0-28334CB3D2EE}
 	EndGlobalSection
 EndGlobal
