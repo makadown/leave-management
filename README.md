@@ -72,5 +72,8 @@ Serilog.Sink.Seq >= v5.2.2
 Serilog.Expression >= v3.4.1
 ```
 
-
+Docker agregado (ejecutar en raíz):
+```
+docker-compose up -d
+```
 
