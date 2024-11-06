@@ -1,36 +1,31 @@
 @model LeaveManagementSystem.Web.Data.LeaveType
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Creación de Tipo de Licencia";
 }
 
-<h1>Create</h1>
-
-<h4>LeaveType</h4>
+<h1>Creación de Tipo de Licencia</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="form-group my-2">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group my-2">
                 <label asp-for="NumberOfDays" class="control-label"></label>
                 <input asp-for="NumberOfDays" class="form-control" />
                 <span asp-validation-for="NumberOfDays" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group my-4">
+                <input type="submit" value="Crear" class="btn btn-warning" />
+                <a asp-action="Index" class="btn btn-primary">Cancelar</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
